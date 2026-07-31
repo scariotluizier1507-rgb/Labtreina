@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treinamentos TREINACCGL</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f2f4f7;
+padding:20px;
+}
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 3px 10px #ccc;
+}
+h1{
+text-align:center;
+color:#145a32;
+}
+input,select,button,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
+button{
+background:#145a32;
+color:white;
+border:none;
+}
+.treinamento{
+margin-top:20px;
+padding:20px;
+background:#eef7f0;
+border-radius:10px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📚 Treinamentos TREINACCGL</h1>
+<h3>Novo treinamento</h3>
+<input id="nome" placeholder="Nome do treinamento">
+<select id="categoria">
+<option>PCC</option>
+<option>POP</option>
+<option>IT</option>
+<option>Manual</option>
+</select>
+<input id="versao" placeholder="Versão do documento">
+<input id="responsavel" placeholder="Responsável">
+<input id="video" placeholder="Link da vídeo aula">
+<textarea id="descricao" placeholder="Descrição do treinamento"></textarea>
+<button onclick="salvarTreinamento()">
+Cadastrar Treinamento
+</button>
+<h2>📋 Treinamentos cadastrados</h2>
+<div id="lista"></div>
+</div>
+<script>
+let treinamentos = JSON.parse(localStorage.getItem("treinamentos")) || [];
+function salvarTreinamento(){
+let dados={
+nome:document.getElementById("nome").value,
+categoria:document.getElementById("categoria").value,
+versao:document.getElementById("versao").value,
+responsavel:document.getElementById("responsavel").value,
+video:document.getElementById("video").value,
+descricao:document.getElementById("descricao").value,
+data:new Date().toLocaleDateString("pt-BR")
+};
+treinamentos.push(dados);
+localStorage.setItem(
+"treinamentos",
+JSON.stringify(treinamentos)
+);
+mostrarTreinamentos();
+alert("Treinamento cadastrado!");
+}
+function mostrarTreinamentos(){
+let lista=document.getElementById("lista");
+lista.innerHTML="";
+treinamentos.forEach((t)=>{
+lista.innerHTML += `
+<div class="treinamento">
+<h3>${t.nome}</h3>
+<p><b>Tipo:</b> ${t.categoria}</p>
+<p><b>Versão:</b> ${t.versao}</p>
+<p><b>Responsável:</b> ${t.responsavel}</p>
+<p><b>Atualizado:</b> ${t.data}</p>
+<p>${t.descricao}</p>
+${t.video ? 
+`<p>🎥 <a href="${t.video}" target="_blank">
+Assistir vídeo aula
+</a></p>`
+:
+""}
+</div>
+`;
+});
+}
+mostrarTreinamentos();
+</script>
+</body>
+</html>
