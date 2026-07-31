@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação - TREINACCGL</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f2f4f7;
+padding:20px;
+}
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 3px 10px #ccc;
+}
+h1{
+text-align:center;
+color:#145a32;
+}
+input, textarea, select, button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
+button{
+background:#145a32;
+color:white;
+border:none;
+}
+.questao{
+background:#eef7f0;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+}
+.resultado{
+margin-top:20px;
+padding:15px;
+font-size:18px;
+text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📝 Avaliação de Treinamento</h1>
+<h3>Treinamento</h3>
+<input id="treinamento" placeholder="Nome do treinamento">
+<h3>Funcionário</h3>
+<input id="funcionario" placeholder="Nome do funcionário">
+<div class="questao">
+<p>
+1 - Qual documento deve ser seguido durante a atividade?
+</p>
+<select id="q1">
+<option value="1">
+Documento vigente (IT/POP)
+</option>
+<option value="0">
+Anotação informal
+</option>
+</select>
+</div>
+<div class="questao">
+<p>
+2 - O colaborador deve executar a atividade conforme procedimento aprovado?
+</p>
+<select id="q2">
+<option value="1">
+Sim
+</option>
+<option value="0">
+Não
+</option>
+</select>
+</div>
+<div class="questao">
+<p>
+3 - Quando houver alteração do procedimento, o treinamento deve ser atualizado?
+</p>
+<select id="q3">
+<option value="1">
+Sim
+</option>
+<option value="0">
+Não
+</option>
+</select>
+</div>
+<button onclick="avaliar()">
+Finalizar Avaliação
+</button>
+<div class="resultado" id="resultado"></div>
+</div>
+<script>
+function avaliar(){
+let pontos =
+Number(document.getElementById("q1").value)+
+Number(document.getElementById("q2").value)+
+Number(document.getElementById("q3").value);
+let nota = (pontos/3)*100;
+let funcionario =
+document.getElementById("funcionario").value;
+let treinamento =
+document.getElementById("treinamento").value;
+let registro = {
+funcionario: funcionario,
+treinamento: treinamento,
+nota: nota,
+data: new Date().toLocaleDateString("pt-BR"),
+status: nota >=70 ? "Aprovado":"Reprovado"
+};
+let avaliacoes = JSON.parse(localStorage.getItem("avaliacoes")) || [];
+avaliacoes.push(registro);
+localStorage.setItem(
+"avaliacoes",
+JSON.stringify(avaliacoes)
+);
+document.getElementById("resultado").innerHTML=
+"Resultado: "+registro.status+
+"<br>Nota: "+nota.toFixed(0)+"%";
+}
+</script>
+</body>
+</html>
