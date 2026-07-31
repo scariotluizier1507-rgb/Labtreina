@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificados - TREINACCGL</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background:#f2f4f7;
+    margin:0;
+    padding:20px;
+}
+.container {
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 10px #ccc;
+}
+h1 {
+    text-align:center;
+    color:#145a32;
+}
+select, button {
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+button {
+    background:#145a32;
+    color:white;
+    cursor:pointer;
+}
+button:hover {
+    background:#0e4023;
+}
+.certificado {
+    margin-top:30px;
+    padding:40px;
+    border:5px solid #145a32;
+    text-align:center;
+    display:none;
+}
+.certificado h2 {
+    font-size:32px;
+}
+.certificado h3 {
+    font-size:25px;
+}
+.info {
+    margin-top:20px;
+    font-size:18px;
+}
+@media print {
+    button, select {
+        display:none;
+    }
+    body {
+        background:white;
+    }
+    .container {
+        box-shadow:none;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎓 Certificados TREINACCGL</h1>
+<label>Selecionar funcionário:</label>
+<select id="funcionario">
+<option value="">Selecione</option>
+</select>
+<label>Selecionar treinamento concluído:</label>
+<select id="treinamento">
+<option value="">Selecione</option>
+</select>
+<button onclick="gerarCertificado()">
+Gerar Certificado
+</button>
+<div class="certificado" id="certificado">
+<h2>CERTIFICADO</h2>
+<p>
+Certificamos que
+</p>
+<h3 id="nomeFuncionario"></h3>
+<p>
+concluiu o treinamento:
+</p>
+<h3 id="nomeTreinamento"></h3>
+<div class="info">
+<p>
+Data de conclusão:
+<span id="data"></span>
+</p>
+<p>
+Código:
+<span id="codigo"></span>
+</p>
+<p>
+Responsável: TREINACCGL
+</p>
+</div>
+</div>
+</div>
+<script>
+let funcionarios = JSON.parse(localStorage.getItem("funcionarios")) || [];
+let treinamentos = JSON.parse(localStorage.getItem("aplicacoes")) || [];
+let selectFuncionario = document.getElementById("funcionario");
+let selectTreinamento = document.getElementById("treinamento");
+funcionarios.forEach((f,index)=>{
+let option=document.createElement("option");
+option.value=index;
+option.textContent=f.nome;
+selectFuncionario.appendChild(option);
+});
+treinamentos.forEach((t,index)=>{
+let option=document.createElement("option");
+option.value=index;
+option.textContent=t.treinamento || "Treinamento";
+selectTreinamento.appendChild(option);
+});
+function gerarCertificado(){
+let f = funcionarios[selectFuncionario.value];
+let t = treinamentos[selectTreinamento.value];
+if(!f || !t){
+alert("Selecione funcionário e treinamento.");
+return;
+}
+document.getElementById("nomeFuncionario").innerHTML=f.nome;
+document.getElementById("nomeTreinamento").innerHTML=
+t.treinamento || "Treinamento";
+document.getElementById("data").innerHTML=
+new Date().toLocaleDateString("pt-BR");
+document.getElementById("codigo").innerHTML=
+"CCGL-"+Math.floor(Math.random()*900000+100000);
+document.getElementById("certificado").style.display="block";
+}
+</script>
+</body>
+</html>
