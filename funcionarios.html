@@ -84,19 +84,68 @@ Cadastrar
 </table>
 </div>
 <script>
+let funcionarios = JSON.parse(localStorage.getItem("funcionarios")) || [];
+
+mostrarFuncionarios();
+
+
 function cadastrarFuncionario(){
+
 let nome = document.getElementById("nome").value;
 let matricula = document.getElementById("matricula").value;
 let cargo = document.getElementById("cargo").value;
 let setor = document.getElementById("setor").value;
-let tabela = document.getElementById("listaFuncionarios");
-let linha = tabela.insertRow();
-linha.insertCell(0).innerHTML = nome;
-linha.insertCell(1).innerHTML = matricula;
-linha.insertCell(2).innerHTML = cargo;
-linha.insertCell(3).innerHTML = setor;
+
+
+let funcionario = {
+
+    nome: nome,
+    matricula: matricula,
+    cargo: cargo,
+    setor: setor
+
+};
+
+
+funcionarios.push(funcionario);
+
+
+localStorage.setItem("funcionarios", JSON.stringify(funcionarios));
+
+
+mostrarFuncionarios();
+
+
 alert("Funcionário cadastrado com sucesso!");
+
+
 }
+
+
+
+function mostrarFuncionarios(){
+
+let tabela = document.getElementById("listaFuncionarios");
+
+tabela.innerHTML = "";
+
+
+funcionarios.forEach(function(funcionario){
+
+
+let linha = tabela.insertRow();
+
+
+linha.insertCell(0).innerHTML = funcionario.nome;
+linha.insertCell(1).innerHTML = funcionario.matricula;
+linha.insertCell(2).innerHTML = funcionario.cargo;
+linha.insertCell(3).innerHTML = funcionario.setor;
+
+
+});
+
+
+
 </script>
 </body>
 </html>
