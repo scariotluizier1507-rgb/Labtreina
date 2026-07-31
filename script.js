@@ -1,9 +1,9 @@
-alert("SCRIPT NOVO CARREGADO");
+alert("Script carregado!");
 
 const botao = document.querySelector("button");
 
 botao.addEventListener("click", function () {
 
-    window.location.href = "admin.html";
+    alert("Botão funcionando!");
 
 });
