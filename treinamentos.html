@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Treinamentos - TREINACCGL</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f5f7;
+    margin:0;
+}
+
+header {
+    background:#006633;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container {
+    padding:20px;
+}
+
+.card {
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+input, select {
+
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    box-sizing:border-box;
+
+}
+
+button {
+
+    background:#006633;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+table {
+
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+
+}
+
+th, td {
+
+    border:1px solid #ddd;
+    padding:10px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>TREINACCGL</h1>
+
+<p>Gestão de Treinamentos - Laboratório</p>
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+<h2>Novo Treinamento</h2>
+
+
+<select id="tipo">
+
+<option value="">Tipo de documento</option>
+
+<option>PCC</option>
+
+<option>POP</option>
+
+<option>IT</option>
+
+<option>Manual</option>
+
+</select>
+
+
+<input id="codigo" placeholder="Código do documento (Ex: PCC-Q1)">
+
+
+<input id="nome" placeholder="Nome do treinamento">
+
+
+<input id="area" value="Laboratório" placeholder="Área">
+
+
+<input id="versao" placeholder="Versão">
+
+
+<input id="data" type="date">
+
+
+<input id="responsavel" placeholder="Responsável">
+
+
+<select id="periodicidade">
+
+<option value="">Periodicidade</option>
+
+<option>Conforme alteração</option>
+
+<option>Anual</option>
+
+<option>Semestral</option>
+
+</select>
+
+
+
+<button onclick="cadastrarTreinamento()">
+
+Cadastrar treinamento
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>Treinamentos cadastrados</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Tipo</th>
+
+<th>Código</th>
+
+<th>Treinamento</th>
+
+<th>Versão</th>
+
+<th>Responsável</th>
+
+</tr>
+
+
+</thead>
+
+
+<tbody id="listaTreinamentos">
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+<button onclick="voltar()">
+
+Voltar ao painel
+
+</button>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let treinamentos = JSON.parse(localStorage.getItem("treinamentos")) || [];
+
+
+mostrarTreinamentos();
+
+
+
+function cadastrarTreinamento(){
+
+
+let treinamento = {
+
+
+tipo: document.getElementById("tipo").value,
+
+codigo: document.getElementById("codigo").value,
+
+nome: document.getElementById("nome").value,
+
+area: document.getElementById("area").value,
+
+versao: document.getElementById("versao").value,
+
+data: document.getElementById("data").value,
+
+responsavel: document.getElementById("responsavel").value,
+
+periodicidade: document.getElementById("periodicidade").value
+
+
+};
+
+
+
+if(!treinamento.tipo || !treinamento.codigo || !treinamento.nome){
+
+alert("Preencha os campos obrigatórios!");
+
+return;
+
+}
+
+
+
+treinamentos.push(treinamento);
+
+
+localStorage.setItem(
+
+"treinamentos",
+
+JSON.stringify(treinamentos)
+
+);
+
+
+
+mostrarTreinamentos();
+
+
+alert("Treinamento cadastrado com sucesso!");
+
+}
+
+
+
+function mostrarTreinamentos(){
+
+
+let tabela = document.getElementById("listaTreinamentos");
+
+
+tabela.innerHTML="";
+
+
+treinamentos.forEach(function(t){
+
+
+let linha = tabela.insertRow();
+
+
+linha.insertCell(0).innerHTML=t.tipo;
+
+linha.insertCell(1).innerHTML=t.codigo;
+
+linha.insertCell(2).innerHTML=t.nome;
+
+linha.insertCell(3).innerHTML=t.versao;
+
+linha.insertCell(4).innerHTML=t.responsavel;
+
+
+});
+
+
+}
+
+
+
+function voltar(){
+
+window.location.href="admin.html";
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
