@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel Administrador - TREINACCGL</title>
+
+
+<style>
+
+body {
+
+font-family: Arial, sans-serif;
+background:#f2f5f7;
+margin:0;
+
+}
+
+
+header {
+
+background:#006633;
+color:white;
+padding:20px;
+text-align:center;
+
+}
+
+
+.container {
+
+padding:20px;
+
+}
+
+
+.card {
+
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:10px;
+
+}
+
+
+button {
+
+background:#006633;
+color:white;
+border:none;
+padding:12px;
+border-radius:8px;
+cursor:pointer;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<header>
+
+<h1>TREINACCGL</h1>
+
+<p>Painel do Administrador</p>
+
+</header>
+
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+<h2>👥 Funcionários</h2>
+
+<p>Cadastro e gerenciamento dos colaboradores.</p>
+
+<button onclick="abrirFuncionarios()">
+
+Acessar
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>📚 Treinamentos</h2>
+
+<p>Cadastro de PCC, POP, IT e documentos.</p>
+
+<button onclick="abrirTreinamentos()">
+
+Acessar
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>📝 Aplicação de Treinamentos</h2>
+
+<p>Registrar treinamentos realizados pelos colaboradores.</p>
+
+<button onclick="abrirAplicacao()">
+
+Acessar
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>🏅 Certificados</h2>
+
+<p>Controle e emissão de certificados.</p>
+
+<button onclick="alert('Módulo de certificados em desenvolvimento')">
+
+Acessar
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>📋 Auditoria</h2>
+
+<p>Histórico e evidências para auditorias.</p>
+
+<button onclick="alert('Módulo de auditoria em desenvolvimento')">
+
+Acessar
+
+</button>
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+function abrirFuncionarios(){
+
+window.location.href="funcionarios.html";
+
+}
+
+
+
+function abrirTreinamentos(){
+
+window.location.href="treinamentos.html";
+
+}
+
+
+
+function abrirAplicacao(){
+
+window.location.href="aplicacao.html";
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
