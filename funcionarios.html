@@ -83,41 +83,51 @@ Cadastrar
 </tbody>
 </table>
 </div>
-<script>
 let funcionarios = JSON.parse(localStorage.getItem("funcionarios")) || [];
 
 mostrarFuncionarios();
 
+function cadastrarFuncionario() {
 
-function cadastrarFuncionario(){
-
-let nome = document.getElementById("nome").value;
-let matricula = document.getElementById("matricula").value;
-let cargo = document.getElementById("cargo").value;
-let setor = document.getElementById("setor").value;
-
-
-let funcionario = {
-
-    nome: nome,
-    matricula: matricula,
-    cargo: cargo,
-    setor: setor
-
-};
+    let nome = document.getElementById("nome").value;
+    let matricula = document.getElementById("matricula").value;
+    let cargo = document.getElementById("cargo").value;
+    let setor = document.getElementById("setor").value;
 
 
-funcionarios.push(funcionario);
+    if(nome === "" || matricula === "" || cargo === "" || setor === ""){
+        alert("Preencha todos os campos!");
+        return;
+    }
 
 
-localStorage.setItem("funcionarios", JSON.stringify(funcionarios));
+    let funcionario = {
+        nome: nome,
+        matricula: matricula,
+        cargo: cargo,
+        setor: setor
+    };
 
 
-mostrarFuncionarios();
+    funcionarios.push(funcionario);
 
 
-alert("Funcionário cadastrado com sucesso!");
+    localStorage.setItem(
+        "funcionarios",
+        JSON.stringify(funcionarios)
+    );
 
+
+    mostrarFuncionarios();
+
+
+    alert("Funcionário cadastrado com sucesso!");
+
+
+    document.getElementById("nome").value = "";
+    document.getElementById("matricula").value = "";
+    document.getElementById("cargo").value = "";
+    document.getElementById("setor").value = "";
 
 }
 
@@ -125,27 +135,22 @@ alert("Funcionário cadastrado com sucesso!");
 
 function mostrarFuncionarios(){
 
-let tabela = document.getElementById("listaFuncionarios");
+    let tabela = document.getElementById("listaFuncionarios");
 
-tabela.innerHTML = "";
-
-
-funcionarios.forEach(function(funcionario){
+    tabela.innerHTML = "";
 
 
-let linha = tabela.insertRow();
+    funcionarios.forEach(function(funcionario){
 
+        let linha = tabela.insertRow();
 
-linha.insertCell(0).innerHTML = funcionario.nome;
-linha.insertCell(1).innerHTML = funcionario.matricula;
-linha.insertCell(2).innerHTML = funcionario.cargo;
-linha.insertCell(3).innerHTML = funcionario.setor;
+        linha.insertCell(0).innerHTML = funcionario.nome;
+        linha.insertCell(1).innerHTML = funcionario.matricula;
+        linha.insertCell(2).innerHTML = funcionario.cargo;
+        linha.insertCell(3).innerHTML = funcionario.setor;
 
+    });
 
-});
-
-
-
-</script>
+}
 </body>
 </html>
