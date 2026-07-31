@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aplicação de Treinamentos - TREINACCGL</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background:#f2f5f7;
+    margin:0;
+}
+
+header {
+    background:#006633;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container {
+    padding:20px;
+}
+
+.card {
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+select,input {
+
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    box-sizing:border-box;
+
+}
+
+button {
+
+    background:#006633;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+
+}
+
+
+table {
+
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+
+}
+
+th,td {
+
+    border:1px solid #ddd;
+    padding:10px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>TREINACCGL</h1>
+
+<p>Aplicação de Treinamentos</p>
+
+</header>
+
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>Registrar Treinamento</h2>
+
+
+<select id="funcionario">
+
+<option value="">
+Selecione o funcionário
+</option>
+
+</select>
+
+
+
+<select id="treinamento">
+
+<option value="">
+Selecione o treinamento
+</option>
+
+</select>
+
+
+
+<input id="data" type="date">
+
+
+
+<input id="instrutor" placeholder="Instrutor">
+
+
+
+<input id="nota" placeholder="Nota da avaliação">
+
+
+
+<select id="status">
+
+<option>Aprovado</option>
+
+<option>Reciclagem necessária</option>
+
+</select>
+
+
+
+<button onclick="registrarTreinamento()">
+
+Registrar
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>Histórico de Treinamentos</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Funcionário</th>
+
+<th>Treinamento</th>
+
+<th>Data</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="historico">
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+<button onclick="voltar()">
+
+Voltar ao painel
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+let funcionarios = JSON.parse(localStorage.getItem("funcionarios")) || [];
+
+let treinamentos = JSON.parse(localStorage.getItem("treinamentos")) || [];
+
+let aplicacoes = JSON.parse(localStorage.getItem("aplicacoes")) || [];
+
+
+
+carregarDados();
+
+mostrarHistorico();
+
+
+
+
+function carregarDados(){
+
+
+let campoFuncionario = document.getElementById("funcionario");
+
+
+funcionarios.forEach(function(f){
+
+
+let opcao = document.createElement("option");
+
+opcao.text = f.nome;
+
+campoFuncionario.add(opcao);
+
+
+});
+
+
+
+let campoTreinamento = document.getElementById("treinamento");
+
+
+
+treinamentos.forEach(function(t){
+
+
+let opcao = document.createElement("option");
+
+opcao.text = t.codigo + " - " + t.nome;
+
+campoTreinamento.add(opcao);
+
+
+});
+
+
+}
+
+
+
+
+function registrarTreinamento(){
+
+
+let registro = {
+
+
+funcionario:
+document.getElementById("funcionario").value,
+
+
+treinamento:
+document.getElementById("treinamento").value,
+
+
+data:
+document.getElementById("data").value,
+
+
+instrutor:
+document.getElementById("instrutor").value,
+
+
+nota:
+document.getElementById("nota").value,
+
+
+status:
+document.getElementById("status").value
+
+
+};
+
+
+
+aplicacoes.push(registro);
+
+
+
+localStorage.setItem(
+
+"aplicacoes",
+
+JSON.stringify(aplicacoes)
+
+);
+
+
+
+mostrarHistorico();
+
+
+alert("Treinamento registrado com sucesso!");
+
+
+
+}
+
+
+
+function mostrarHistorico(){
+
+
+let tabela=document.getElementById("historico");
+
+
+tabela.innerHTML="";
+
+
+
+aplicacoes.forEach(function(a){
+
+
+let linha=tabela.insertRow();
+
+
+linha.insertCell(0).innerHTML=a.funcionario;
+
+linha.insertCell(1).innerHTML=a.treinamento;
+
+linha.insertCell(2).innerHTML=a.data;
+
+linha.insertCell(3).innerHTML=a.status;
+
+
+
+});
+
+
+}
+
+
+
+
+function voltar(){
+
+window.location.href="admin.html";
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
