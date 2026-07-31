@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Gestor - TREINACCGL</title>
+<style>
+*{
+box-sizing:border-box;
+}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f8fc;
+}
+.menu{
+position:fixed;
+left:0;
+top:0;
+height:100%;
+width:240px;
+background:#0057b8;
+padding-top:20px;
+color:white;
+}
+.menu h1{
+text-align:center;
+font-size:24px;
+}
+.menu a{
+display:block;
+color:white;
+text-decoration:none;
+padding:15px 20px;
+font-size:16px;
+}
+.menu a:hover{
+background:#003f87;
+}
+.conteudo{
+margin-left:240px;
+padding:25px;
+}
+.topo{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 3px 10px #d0d7e2;
+}
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:20px;
+}
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 3px 10px #d0d7e2;
+}
+.numero{
+font-size:38px;
+font-weight:bold;
+color:#0057b8;
+}
+h2{
+color:#0057b8;
+}
+.item{
+background:#eef5ff;
+padding:15px;
+margin-top:10px;
+border-radius:10px;
+}
+@media(max-width:700px){
+.menu{
+width:100%;
+height:auto;
+position:relative;
+}
+.conteudo{
+margin-left:0;
+}
+}
+</style>
+</head>
+<body>
+<div class="menu">
+<h1>
+TREINACCGL
+</h1>
+<a href="index.html">
+🏠 Início
+</a>
+<a href="funcionarios.html">
+👥 Funcionários
+</a>
+<a href="treinamentos.html">
+📚 Treinamentos
+</a>
+<a href="videoaulas.html">
+🎥 Vídeo Aulas
+</a>
+<a href="avaliacao.html">
+📝 Avaliações
+</a>
+<a href="certificados.html">
+🎓 Certificados
+</a>
+<a href="admin.html">
+📊 Gestor
+</a>
+<a href="login.html">
+🚪 Sair
+</a>
+</div>
+<div class="conteudo">
+<div class="topo">
+<h1>
+📊 Painel do Gestor
+</h1>
+<p>
+Controle geral de capacitação e treinamentos
+</p>
+</div>
+<div class="cards">
+<div class="card">
+<h2>👥 Funcionários</h2>
+<div class="numero" id="funcionarios">
+0
+</div>
+</div>
+<div class="card">
+<h2>📚 Treinamentos</h2>
+<div class="numero" id="treinamentos">
+0
+</div>
+</div>
+<div class="card">
+<h2>📝 Avaliações</h2>
+<div class="numero" id="avaliacoes">
+0
+</div>
+</div>
+<div class="card">
+<h2>🎓 Certificados</h2>
+<div class="numero">
+0
+</div>
+</div>
+</div>
+<div class="card">
+<h2>
+📚 Treinamentos cadastrados
+</h2>
+<div id="listaTreinamentos"></div>
+</div>
+<div class="card">
+<h2>
+📝 Resultados das avaliações
+</h2>
+<div id="listaAvaliacoes"></div>
+</div>
+</div>
+<script>
+let funcionarios =
+JSON.parse(localStorage.getItem("funcionarios")) || [];
+let treinamentos =
+JSON.parse(localStorage.getItem("treinamentos")) || [];
+let avaliacoes =
+JSON.parse(localStorage.getItem("avaliacoes")) || [];
+document.getElementById("funcionarios").innerHTML =
+funcionarios.length;
+document.getElementById("treinamentos").innerHTML =
+treinamentos.length;
+document.getElementById("avaliacoes").innerHTML =
+avaliacoes.length;
+treinamentos.forEach(t=>{
+document.getElementById("listaTreinamentos").innerHTML +=
+`
+<div class="item">
+<b>${t.nome}</b><br>
+Tipo: ${t.categoria}<br>
+Versão: ${t.versao}<br>
+Responsável: ${t.responsavel}
+</div>
+`;
+});
+avaliacoes.forEach(a=>{
+document.getElementById("listaAvaliacoes").innerHTML +=
+`
+<div class="item">
+<b>${a.funcionario}</b><br>
+Treinamento: ${a.treinamento}<br>
+Nota: ${a.nota}%<br>
+Status: ${a.status}
+</div>
+`;
+});
+</script>
+</body>
+</html>
