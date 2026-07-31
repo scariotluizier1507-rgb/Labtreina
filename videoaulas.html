@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vídeo Aulas - TREINACCGL</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f2f4f7;
+padding:20px;
+}
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 3px 10px #ccc;
+}
+h1{
+text-align:center;
+color:#145a32;
+}
+input,select,button,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
+button{
+background:#145a32;
+color:white;
+border:none;
+}
+.aula{
+margin-top:20px;
+padding:20px;
+background:#eef7f0;
+border-radius:10px;
+}
+a{
+color:#145a32;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎥 Vídeo Aulas TREINACCGL</h1>
+<h3>Cadastrar nova aula</h3>
+<input id="titulo" placeholder="Nome da vídeo aula">
+<select id="categoria">
+<option>PCC</option>
+<option>POP</option>
+<option>IT</option>
+<option>Manual</option>
+</select>
+<input id="link" placeholder="Link do vídeo">
+<input id="responsavel" placeholder="Responsável">
+<textarea id="descricao" placeholder="Descrição da aula"></textarea>
+<button onclick="salvarAula()">
+Salvar Vídeo Aula
+</button>
+<h2>📚 Aulas disponíveis</h2>
+<div id="lista"></div>
+</div>
+<script>
+let aulas = JSON.parse(localStorage.getItem("videoaulas")) || [];
+function salvarAula(){
+let aula={
+titulo:document.getElementById("titulo").value,
+categoria:document.getElementById("categoria").value,
+link:document.getElementById("link").value,
+responsavel:document.getElementById("responsavel").value,
+descricao:document.getElementById("descricao").value,
+data:new Date().toLocaleDateString("pt-BR")
+};
+aulas.push(aula);
+localStorage.setItem("videoaulas",JSON.stringify(aulas));
+mostrarAulas();
+alert("Vídeo aula cadastrada!");
+}
+function mostrarAulas(){
+let lista=document.getElementById("lista");
+lista.innerHTML="";
+aulas.forEach((a)=>{
+lista.innerHTML += `
+<div class="aula">
+<h3>${a.titulo}</h3>
+<p><b>Categoria:</b> ${a.categoria}</p>
+<p>${a.descricao}</p>
+<p><b>Responsável:</b> ${a.responsavel}</p>
+<p><b>Publicado:</b> ${a.data}</p>
+<a href="${a.link}" target="_blank">
+▶ Assistir aula
+</a>
+</div>
+`;
+});
+}
+mostrarAulas();
+</script>
+</body>
+</html>
