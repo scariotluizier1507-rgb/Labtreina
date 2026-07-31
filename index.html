@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TREINACCGL</title>
+<script>
+if(!localStorage.getItem("perfil")){
+window.location.href="login.html";
+}
+</script>
+<style>
+*{
+box-sizing:border-box;
+}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f8fc;
+}
+.menu{
+position:fixed;
+left:0;
+top:0;
+width:240px;
+height:100%;
+background:#0057b8;
+color:white;
+padding-top:20px;
+}
+.menu h1{
+text-align:center;
+font-size:26px;
+}
+.menu a{
+display:block;
+padding:15px 20px;
+color:white;
+text-decoration:none;
+}
+.menu a:hover{
+background:#003f87;
+}
+.conteudo{
+margin-left:240px;
+padding:30px;
+}
+.bemvindo{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 3px 10px #d0d7e2;
+}
+h1,h2{
+color:#0057b8;
+}
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-top:25px;
+}
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 3px 10px #d0d7e2;
+text-align:center;
+}
+.card h2{
+font-size:20px;
+}
+button{
+background:#0057b8;
+color:white;
+border:none;
+padding:12px;
+width:100%;
+border-radius:10px;
+font-size:16px;
+}
+@media(max-width:700px){
+.menu{
+position:relative;
+width:100%;
+height:auto;
+}
+.conteudo{
+margin-left:0;
+}
+.cards{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+<body>
+<div class="menu">
+<h1>
+TREINACCGL
+</h1>
+<a href="index.html">
+🏠 Início
+</a>
+<a href="funcionarios.html">
+👥 Funcionários
+</a>
+<a href="treinamentos.html">
+📚 Treinamentos
+</a>
+<a href="videoaulas.html">
+🎥 Vídeo Aulas
+</a>
+<a href="avaliacao.html">
+📝 Avaliações
+</a>
+<a href="certificados.html">
+🎓 Certificados
+</a>
+<a href="admin.html">
+📊 Gestor
+</a>
+<a href="login.html" onclick="sair()">
+🚪 Sair
+</a>
+</div>
+<div class="conteudo">
+<div class="bemvindo">
+<h1>
+Bem-vindo ao TREINACCGL 👋
+</h1>
+<p id="usuario"></p>
+<p>
+Sistema de gestão de treinamentos, capacitação e registros da equipe.
+</p>
+</div>
+<div class="cards">
+<div class="card">
+<h2>
+👥 Pessoas
+</h2>
+<p>
+Cadastro e acompanhamento dos colaboradores.
+</p>
+<button onclick="location.href='funcionarios.html'">
+Acessar
+</button>
+</div>
+<div class="card">
+<h2>
+📚 Treinamentos
+</h2>
+<p>
+Controle de cursos, ITs, POPs e PCCs.
+</p>
+<button onclick="location.href='treinamentos.html'">
+Acessar
+</button>
+</div>
+<div class="card">
+<h2>
+🎥 Capacitação
+</h2>
+<p>
+Vídeos e avaliações.
+</p>
+<button onclick="location.href='videoaulas.html'">
+Acessar
+</button>
+</div>
+</div>
+</div>
+<script>
+let usuario =
+localStorage.getItem("usuario");
+document.getElementById("usuario").innerHTML =
+"Bem-vindo, " + usuario;
+function sair(){
+localStorage.removeItem("perfil");
+localStorage.removeItem("usuario");
+}
+</script>
+</body>
+</html>
