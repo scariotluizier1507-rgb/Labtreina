@@ -1,15 +1,9 @@
-const botao = document.querySelector(“button”);
+alert("SCRIPT NOVO CARREGADO");
 
-botao.addEventListener(“click”, function () {
+const botao = document.querySelector("button");
 
-const usuario = document.querySelector('input[type="text"]').value;
-const senha = document.querySelector('input[type="password"]').value;
-if (usuario === "admin" && senha === "1234") {
-    alert("Bem-vindo ao TREINACCGL!");
-    // abre a tela do administrador
+botao.addEventListener("click", function () {
+
     window.location.href = "admin.html";
-} else {
-    alert("Usuário ou senha incorretos.");
-}
 
 });
