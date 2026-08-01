@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TREINACCGL - Dashboard</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<aside class="menu">
+
+
+<div class="logo-menu">
+
+🧪
+
+<h2>TREINACCGL</h2>
+
+<p>Laboratório</p>
+
+</div>
+
+
+
+<nav>
+
+
+<a href="dashboard.html">
+🏠 Início
+</a>
+
+
+<a href="funcionarios.html">
+👥 Equipe
+</a>
+
+
+<a href="#">
+📚 Treinamentos
+</a>
+
+
+<a href="#">
+📄 Documentos ICOQ
+</a>
+
+
+<a href="#">
+🎥 Videoaulas
+</a>
+
+
+<a href="#">
+📝 Avaliações
+</a>
+
+
+<a href="#">
+🏆 Certificados
+</a>
+
+
+<a href="#">
+📊 Indicadores
+</a>
+
+
+</nav>
+
+
+
+<button onclick="sair()">
+
+🚪 Sair
+
+</button>
+
+
+</aside>
+
+
+
+
+
+<main class="conteudo">
+
+
+
+<header class="topo">
+
+
+<div>
+
+<h1>
+Dashboard
+</h1>
+
+<p>
+Gestão de treinamentos do laboratório
+</p>
+
+</div>
+
+
+
+<div class="usuario">
+
+
+<strong id="nomeUsuario">
+Usuário
+</strong>
+
+
+<span id="perfilUsuario">
+Perfil
+</span>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+<section class="cards">
+
+
+
+<div class="card">
+
+<h3>
+👥 Equipe
+</h3>
+
+<strong>
+18
+</strong>
+
+<p>
+Funcionários ativos
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+📚 Treinamentos
+</h3>
+
+<strong>
+42
+</strong>
+
+<p>
+Cursos disponíveis
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+📄 ICOQ
+</h3>
+
+<strong>
+63
+</strong>
+
+<p>
+Documentos controlados
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+🏆 Certificados
+</h3>
+
+<strong>
+320
+</strong>
+
+<p>
+Emitidos
+</p>
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="painel">
+
+
+<h2>
+Conformidade por Turno
+</h2>
+
+
+
+<div class="turno">
+
+<span>
+🌅 Turno A
+</span>
+
+<b>
+100%
+</b>
+
+</div>
+
+
+
+<div class="turno">
+
+<span>
+🌇 Turno B
+</span>
+
+<b>
+94%
+</b>
+
+</div>
+
+
+
+<div class="turno">
+
+<span>
+🌙 Turno C
+</span>
+
+<b>
+86%
+</b>
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="painel">
+
+
+<h2>
+Últimas Atualizações
+</h2>
+
+
+
+<div class="atividade">
+
+📄 ICOQ 003 - Versão 2.0 atualizada
+
+</div>
+
+
+<div class="atividade">
+
+📚 Novo treinamento disponibilizado
+
+</div>
+
+
+<div class="atividade">
+
+🎥 Nova videoaula adicionada
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+</main>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+let usuario = JSON.parse(
+
+localStorage.getItem("usuarioLogado")
+
+);
+
+
+
+if(usuario){
+
+
+document.getElementById("nomeUsuario").innerHTML =
+usuario.nome;
+
+
+document.getElementById("perfilUsuario").innerHTML =
+usuario.perfil;
+
+
+
+}else{
+
+
+window.location.href="login.html";
+
+
+}
+
+
+
+
+
+function sair(){
+
+
+localStorage.removeItem("usuarioLogado");
+
+window.location.href="login.html";
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
