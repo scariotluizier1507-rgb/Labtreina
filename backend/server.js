@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const funcionarios = require("./routes/funcionarios");
+
 
 const app = express();
 
@@ -8,6 +10,11 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
+
+
+// Rota de funcionários
+
+app.use("/funcionarios", funcionarios);
 
 
 
